@@ -28,7 +28,13 @@ $sonsayfaMeta='"pageEnd": "';
 $belgeMeta='Belge Türü:</span>';
 $makaleMeta='Makale Türü:</span>';
 ```
-
+reads authors from
+```
+$metas = $doc->getElementsByTagName('meta');
+foreach ($metas as $meta) {
+  if (strtolower($meta->getAttribute('name')) == 'citation_author') {
+```
+  
 displays metadata
 
 
