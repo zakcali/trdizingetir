@@ -2,9 +2,13 @@
 displays article data if trdizin article number is known
 
 fetches utf-8 html form url
+
+```
     $opts = array('http' => array('header' => 'Accept-Charset: UTF-8, *;q=0'));
     $context = stream_context_create($opts);
     $html=file_get_contents($url, false, $context);
+```
+
 
 reads metadata from
 $volumeMeta='meta name="DC.Source.Volume" content="';
