@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- trdizin getir V1.1: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
+<!-- trdizin getir V1.3: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
 programmed by Zafer Akçalı, MD -->
 <html>
 <head>
@@ -24,8 +24,8 @@ $yearMeta='meta name="citation_publication_date" content="';
 $doiMeta='<meta name="citation_doi" content="';
 $ilksayfaMeta='"pageStart": "';
 $sonsayfaMeta='"pageEnd": "';
-$belgeMeta='Belge Türü:</span>';
-$makaleMeta='Makale Türü:</span>';
+$belgeMeta='Belge T'; // Belge Türü, Türkçe karakter olmadan
+$makaleMeta='Makale T'; // Makale Türü, Türkçe karakter olmadan
 $dergiMeta='http://search/dergi/detay/';
 if (isset($_POST['trdizinid'])) {
 $gelenTrdizin=preg_replace("/[^0-9]/", "", $_POST["trdizinid"] ); // sadece rakamlar
@@ -55,14 +55,14 @@ if (stripos($html,$titleMeta)) {
 	}
 // yayın türü
 if (stripos($html,$belgeMeta)) {
-	$start = stripos($html, $belgeMeta)+strlen($belgeMeta);
+	$start = stripos($html, $belgeMeta)+strlen($belgeMeta)+21; // Türkçe karakter atlama sorunu sebebiyle 21 karakter
 	$end= stripos($html,'</span>',$offset = $start );
 	$length = $end - $start;
 	$PublicationType = trim (substr($html, $start, $length));
 	}
 // makale türü
 if (stripos($html,$makaleMeta)) {
-	$start = stripos($html, $makaleMeta)+strlen($makaleMeta);
+	$start = stripos($html, $makaleMeta)+strlen($makaleMeta)+21; // Türkçe karakter atlama sorunu sebebiyle 21 karakter
 	$end= stripos($html,'</span>',$offset = $start );
 	$length = $end - $start;
 	$ArticleType = trim (substr($html, $start, $length));
