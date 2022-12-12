@@ -37,4 +37,12 @@ foreach ($metas as $meta) {
   
 displays metadata
 
+unfortunately, below code also corrupted Turkish characters on some servers, so i need to install mbstring extension
+
+```
+$opts = array('http' => array('header' => 'Accept-Charset: UTF-8, *;q=0'));
+$context = stream_context_create($opts);
+$html=file_get_contents($url, false, $context);
+```
+
 
