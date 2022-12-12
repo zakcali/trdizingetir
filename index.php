@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- trdizin getir V1.2: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
+<!-- trdizin getir V1.1: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
 programmed by Zafer Akçalı, MD -->
 <html>
 <head>
@@ -33,11 +33,15 @@ $gelenTrdizin=preg_replace("/[^0-9]/", "", $_POST["trdizinid"] ); // sadece raka
 if($gelenTrdizin!=""){
 $preText="https://search.trdizin.gov.tr/yayin/detay/";
 $url = $preText.$gelenTrdizin;
+// echo ($url);
+// echo ("<br>");
+
 // https://www.scrapingbee.com/blog/web-scraping-php/
-// https://stackoverflow.com/questions/5600371/file-get-contents-converts-utf-8-to-iso-8859-1
-$opts = array('http' => array('header' => 'Accept-Charset: UTF-8, *;q=0'));
-$context = stream_context_create($opts);
-$html=file_get_contents($url, false, $context);
+$icerik=file_get_contents($url);
+// On Windows, uncomment the following line in php.ini, and restart the Apache server:
+// extension=mbstring
+// extension=php_mbstring.dll
+$html= mb_convert_encoding($icerik, 'HTML-ENTITIES', "UTF-8");
 // echo $html;
 
 // print_r ($trdizinBilgi);
