@@ -1,5 +1,5 @@
 # trdizingetir
-displays article data if trdizin article number is known
+displays article information if trdizin article number is known
 
 fetches utf-8 html form url
 
