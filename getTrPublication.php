@@ -1,6 +1,7 @@
 <?php
 class getTrPublication {
-	public $trdizinid='', $doi='', $ArticleTitle='', $dergi='', $ISOAbbreviation='', $ISSN='', $eISSN='', $Year='', $Volume='', $Issue='', $StartPage='', $EndPage='', $yazarlar='', $PublicationType='', $AbstractText='', $dergiLinki='', $ArticleType='';
+	public $trdizinid='', $doi='', $ArticleTitle='', $dergi='', $ISOAbbreviation='', $ISSN='', $eISSN='', $Year='', $Volume='', $Issue='', $StartPage='', $EndPage='', $yazarlar='', $PublicationType='', $AbstractText='', $dergiLinki='', $ArticleType='', $dikkat='';
+	public $yazarS=0;
 
 	    function __construct() {
 		}
@@ -22,22 +23,24 @@ class getTrPublication {
 		$makaleMeta='Makale T'; // Makale Türü, Türkçe karakter olmadan
 		$dergiMeta='http://search/dergi/detay/';
 
-		if($numara!=""){
-			$preText="https://search.trdizin.gov.tr/yayin/detay/";
-			$url = $preText.$numara;
+		$preText="https://search.trdizin.gov.tr/yayin/detay/";
+		$url = $preText.$numara;
 // echo ($url);
 // echo ("<br>");
 
 // https://www.scrapingbee.com/blog/web-scraping-php/
-			$icerik=file_get_contents($url);
+	$icerik=@file_get_contents($url);
+https://stackoverflow.com/questions/51095694/unable-to-catch-php-file-get-contents-error-using-try-catch-block
+	if(empty($icerik))
+		$this->dikkat='yayın bulunamadı';    
+	else { // 404 hatası gelmedi, demek ki yayın sayfası var.
 // On Windows, uncomment the following line in php.ini, and restart the Apache server:
 // extension=mbstring
 // extension=php_mbstring.dll
-			$html= mb_convert_encoding($icerik, 'HTML-ENTITIES', "UTF-8");
+		$html= mb_convert_encoding($icerik, 'HTML-ENTITIES', "UTF-8");
 // echo $html;
 
 // print_r ($trdizinBilgi);
-			if ( true) {// hata kontrolü yapmak gerek ??
 // Makalenin başlığı
 			if (stripos($html,$titleMeta)) {
 				$start = stripos($html, $titleMeta)+strlen($titleMeta);
@@ -168,9 +171,7 @@ class getTrPublication {
 					}
 				}
 			$this->yazarlar=substr ($this->yazarlar,0,-2);
-			} // {"message":"Forbidden"} hatası gelmedi
-		} 
-
-
+		} // icerik geldi ,işlendi
 	} // final function trPublication
+
 }
