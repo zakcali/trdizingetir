@@ -27,13 +27,14 @@ class getTrPublication {
 		$url = $preText.$numara;
 // echo ($url);
 // echo ("<br>");
-
+	$headers = get_headers($url);
+	if(substr($headers[0], 9, 3) != "200") {
+		$this->dikkat='yayın bulunamadı';   
+		return;
+		}	
 // https://www.scrapingbee.com/blog/web-scraping-php/
 	$icerik=@file_get_contents($url);
-https://stackoverflow.com/questions/51095694/unable-to-catch-php-file-get-contents-error-using-try-catch-block
-	if(empty($icerik))
-		$this->dikkat='yayın bulunamadı';    
-	else { // 404 hatası gelmedi, demek ki yayın sayfası var.
+
 // On Windows, uncomment the following line in php.ini, and restart the Apache server:
 // extension=mbstring
 // extension=php_mbstring.dll
@@ -171,7 +172,6 @@ https://stackoverflow.com/questions/51095694/unable-to-catch-php-file-get-conten
 					}
 				}
 			$this->yazarlar=substr ($this->yazarlar,0,-2);
-		} // icerik geldi ,işlendi
 	} // final function trPublication
 
 }
