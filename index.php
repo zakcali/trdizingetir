@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- trdizin getir V2.1: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
+<!-- trdizin getir V2.2: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
 programmed by Zafer Akçalı, MD -->
 <html>
 <head>
