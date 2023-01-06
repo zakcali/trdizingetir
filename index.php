@@ -11,7 +11,7 @@ programmed by Zafer Akçalı, MD -->
 <?php
 // By Zafer Akçalı, MD
 // Zafer Akçalı tarafından programlanmıştır
-require_once './getTrPublication.php';
+require_once 'getTrPublication.php';
 $t=new getTrPublication ();
 
 if (isset($_POST['trdizinid'])) {
@@ -32,7 +32,7 @@ Trdizin makale numarasını giriniz. <?php echo ' '.$t->dikkat;?><br/>
 <br/>
 Trdizin id: <input type="text" name="eid" size="25" id="eid" value="<?php echo $t->trdizinid;?>" >  
 doi: <input type="text" name="doi" size="55"  id="doi" value="<?php echo $t->doi;?>"> <br/>
-Makalenin başlığı: <input type="text" name="ArticleTitle" size="85"  id="ArticleTitle" value="<?php echo str_replace ('"',  '&#34',$t->ArticleTitle);?>"> <br/>
+Başlık: <input type="text" name="ArticleTitle" size="96"  id="ArticleTitle" value="<?php echo str_replace ('"',  '&#34',$t->ArticleTitle);?>"> <br/>
 Dergi ismi: <input type="text" name="Title" size="50"  id="Title" value="<?php echo $t->dergi;?>"> 
 Kısa ismi: <input type="text" name="ISOAbbreviation" size="26"  id="ISOAbbreviation" value="<?php echo $t->ISOAbbreviation;?>"> <br/>
 ISSN: <input type="text" name="ISSN" size="8"  id="ISSN" value="<?php echo $t->ISSN;?>">
