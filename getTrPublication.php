@@ -1,12 +1,15 @@
 <?php
 class getTrPublication {
-	public $trdizinid='', $doi='', $ArticleTitle='', $dergi='', $ISOAbbreviation='', $ISSN='', $eISSN='', $Year='', $Volume='', $Issue='', $StartPage='', $EndPage='', $yazarlar='', $PublicationType='', $AbstractText='', $dergiLinki='', $ArticleType='', $dikkat='';
-	public $yazarS=0;
-
 	    function __construct() {
+			$this->initialize();
 		}
-		
+		function initialize () {
+			$this->trdizinid=''; $this->doi=''; $this->ArticleTitle=''; $this->dergi=''; $this->ISSN=''; $this->eISSN=''; $this->Year=''; $this->Volume=''; $this->Issue=''; $this->StartPage=''; $this->EndPage=''; $this->yazarlar=''; $this->PublicationType=''; $this->AbstractText='';$this->dergiLinki=''; $this->ArticleType=''; $this->dikkat='';
+			$this->yazarS=0; 
+		}
+			
 		final function trPublication ($numara) {
+		$this->initialize();
 			
 		$volumeMeta='meta name="DC.Source.Volume" content="';
 		$issueMeta='meta name="DC.Source.Issue" content="';
@@ -27,7 +30,11 @@ class getTrPublication {
 		$url = $preText.$numara;
 // echo ($url);
 // echo ("<br>");
-	$headers = get_headers($url);
+	$headers = @get_headers($url);	
+	if (!$headers) {
+			$this->dikkat='bağlantı kurulamadı';   
+			return;
+			}
 	if(substr($headers[0], 9, 3) != "200") {
 		$this->dikkat='yayın bulunamadı';   
 		return;

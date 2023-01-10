@@ -33,8 +33,7 @@ Trdizin makale numarasını giriniz. <?php echo ' '.$t->dikkat;?><br/>
 Trdizin id: <input type="text" name="eid" size="25" id="eid" value="<?php echo $t->trdizinid;?>" >  
 doi: <input type="text" name="doi" size="55"  id="doi" value="<?php echo $t->doi;?>"> <br/>
 Başlık: <input type="text" name="ArticleTitle" size="96"  id="ArticleTitle" value="<?php echo str_replace ('"',  '&#34',$t->ArticleTitle);?>"> <br/>
-Dergi ismi: <input type="text" name="Title" size="50"  id="Title" value="<?php echo $t->dergi;?>"> 
-Kısa ismi: <input type="text" name="ISOAbbreviation" size="26"  id="ISOAbbreviation" value="<?php echo $t->ISOAbbreviation;?>"> <br/>
+Dergi ismi: <input type="text" name="Title" size="50"  id="Title" value="<?php echo $t->dergi;?>"> <br/>
 ISSN: <input type="text" name="ISSN" size="8"  id="ISSN" value="<?php echo $t->ISSN;?>">
 eISSN: <input type="text" name="eISSN" size="8"  id="eISSN" value="<?php echo $t->eISSN;?>">
 <br/>
