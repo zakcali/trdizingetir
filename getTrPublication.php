@@ -5,7 +5,7 @@ class getTrPublication {
 		}
 		function initialize () {
 			$this->trdizinid=''; $this->doi=''; $this->ArticleTitle=''; $this->dergi=''; $this->ISSN=''; $this->eISSN=''; $this->Year=''; $this->Volume=''; $this->Issue=''; $this->StartPage=''; $this->EndPage=''; $this->yazarlar=''; $this->PublicationType=''; $this->AbstractText='';$this->dergiLinki=''; $this->ArticleType=''; $this->dikkat='';
-			$this->yazarS=0; 
+			$this->yazarS=0; $this->sil='';
 		}
 			
 		final function trPublication ($numara) {
@@ -167,18 +167,16 @@ class getTrPublication {
 			$doc = new DOMDocument();
 // squelch HTML5 errors
 			@$doc->loadHTML($html);
-			$metas = $doc->getElementsByTagName('meta');
-			foreach ($metas as $meta) {
-				if (strtolower($meta->getAttribute('name')) == 'citation_author') {
-					$ad = $meta->getAttribute('content');
-					$soyadAd=explode (", ", $ad);
-					$soyisim=$soyadAd[0];
-					$isim=$soyadAd[1];
-					$this->yazarlar=$this->yazarlar.$isim." ".$soyisim.", ";
-					$this->yazarS=$this->yazarS+1;
-					}
-				}
-			$this->yazarlar=substr ($this->yazarlar,0,-2);
+            $divs= $doc->getElementsByTagName('div');
+			// unfortunately <meta name="citation_author" content="surname, name" /> are unsorted
+            foreach ($divs as $div) {
+                if (strtolower($div->getAttribute('class')) == 'new') {
+                    $isimsoyisim = trim($div->getElementsByTagName('a')->item(0)->nodeValue);
+                    $this->yazarlar=$this->yazarlar.$isimsoyisim.' ';
+                    $this->yazarS=$this->yazarS+1;
+                }
+            }
+            $this->yazarlar=substr ($this->yazarlar,0,-1);
 	} // final function trPublication
 
 }

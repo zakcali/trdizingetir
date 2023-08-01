@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- trdizin getir V2.2: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur 
+<!-- trdizin getir V3.0: bu yazılım Dr. Zafer Akçalı tarafından oluşturulmuştur
 programmed by Zafer Akçalı, MD -->
 <html>
 <head>
@@ -15,14 +15,16 @@ require_once 'getTrPublication.php';
 $t=new getTrPublication ();
 
 if (isset($_POST['trdizinid'])) {
-$gelenTrdizin=preg_replace("/[^0-9]/", "", $_POST["trdizinid"] ); // sadece rakamlar
-$t->trPublication ($gelenTrdizin);
+    if ($_POST["trdizinid"] != '') {
+        $gelenTrdizin=preg_replace("/[^0-9]/", "", $_POST["trdizinid"] ); // sadece rakamlar
+        $t->trPublication ($gelenTrdizin);
+    }
 }
 ?>
 <a href="trdizin id nerede.png" target="_blank"> Trdizin numarasına nereden bakılır? </a>
 <form method="post" action="">
 Trdizin makale numarasını giriniz. <?php echo ' '.$t->dikkat;?><br/>
-<input type="text" name="trdizinid" id="trdizinid" value="<?php echo $t->trdizinid;?>" >
+<input type="text" name="trdizinid" id="trdizinid" value="<?php echo $t->sil;?>" >
 <input type="submit" value="Trdizin yayın bilgilerini PHP ile getir">
 </form>
 <button id="trDizinGoster" onclick="trDizinGoster()">Trdizin yayınını göster</button>
