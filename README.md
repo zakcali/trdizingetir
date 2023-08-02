@@ -28,13 +28,19 @@ $sonsayfaMeta='"pageEnd": "';
 $belgeMeta='Belge Türü:</span>';
 $makaleMeta='Makale Türü:</span>';
 ```
-reads authors from
+was reading authors from metas (unfortunately sort order is wrong)
 ```
 $metas = $doc->getElementsByTagName('meta');
 foreach ($metas as $meta) {
   if (strtolower($meta->getAttribute('name')) == 'citation_author') {
 ```
-  
+now reads authors from web page (sorted)
+```
+$divs= $doc->getElementsByTagName('div');
+foreach ($divs as $div) {
+  if (strtolower($div->getAttribute('class')) == 'new') {
+    $isimsoyisim = trim($div->getElementsByTagName('a')->item(0)->nodeValue);
+```
 displays metadata
 
 unfortunately, below code also corrupted Turkish characters on some servers, so i need to install mbstring extension
